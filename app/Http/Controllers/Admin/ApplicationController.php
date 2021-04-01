@@ -27,12 +27,15 @@ class ApplicationController extends Controller
     {
         abort_if(Gate::denies('application_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        return view('admin.applications.create');
+        $posts = Post::all()->pluck('title', 'id');
+
+        return view('admin.applications.create', compact('posts'));
     }
 
     public function store(StoreApplicationRequest $request)
     {
         $application = Application::create($request->all());
+        $application->posts()->sync($request->input('posts', []));
 
         return redirect()->route('admin.applications.index');
     }

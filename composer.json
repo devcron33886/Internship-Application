@@ -12,6 +12,7 @@
         "laravel/framework": "^8.12",
         "laravel/tinker": "^2.5",
         "laravel/ui": "^3.2",
+        "laraveldaily/laravel-charts": "^0.1.25",
         "spatie/laravel-medialibrary": "^9.5",
         "spatie/opening-hours": "^2.10",
         "yajra/laravel-datatables-oracle": "^9.17"

@@ -10,6 +10,24 @@
         <form method="POST" action="{{ route("admin.applications.store") }}" enctype="multipart/form-data">
             @csrf
             <div class="form-group">
+                <label class="required" for="posts">{{ trans('cruds.application.fields.post') }}</label>
+                <div style="padding-bottom: 4px">
+                    <span class="btn btn-info btn-xs select-all" style="border-radius: 0">{{ trans('global.select_all') }}</span>
+                    <span class="btn btn-info btn-xs deselect-all" style="border-radius: 0">{{ trans('global.deselect_all') }}</span>
+                </div>
+                <select class="form-control select2 {{ $errors->has('posts') ? 'is-invalid' : '' }}" name="posts[]" id="posts" multiple required>
+                    @foreach($posts as $id => $post)
+                        <option value="{{ $id }}" {{ in_array($id, old('posts', [])) ? 'selected' : '' }}>{{ $post }}</option>
+                    @endforeach
+                </select>
+                @if($errors->has('posts'))
+                    <div class="invalid-feedback">
+                        {{ $errors->first('posts') }}
+                    </div>
+                @endif
+                <span class="help-block">{{ trans('cruds.application.fields.post_helper') }}</span>
+            </div>
+            <div class="form-group">
                 <label class="required">{{ trans('cruds.application.fields.status') }}</label>
                 <select class="form-control {{ $errors->has('status') ? 'is-invalid' : '' }}" name="status" id="status" required>
                     <option value disabled {{ old('status', null) === null ? 'selected' : '' }}>{{ trans('global.pleaseSelect') }}</option>
